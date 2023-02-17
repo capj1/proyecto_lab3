@@ -1,0 +1,19 @@
+import numpy as np
+import pandas as pd
+import math
+pd.set_option('display.float_format', lambda x: '%.2f' % x)
+
+tabla_hombre = pd.read_excel("Tablas de Mortalidad.xlsx")
+tabla_mujer = pd.read_excel("Tablas de Mortalidad.xlsx",sheet_name=1)
+tabla_mujer_np = tabla_mujer.to_numpy()
+tabla_hombre_np = tabla_hombre.to_numpy()
+
+
+
+def anualidad(prob,incr,desc,pagos):
+    desc = np.array([desc])
+    vector_incrementos = np.array([incr])
+    prob = np.array([prob])
+    pagos = np.array([pagos])
+    SEM = (1+0.0875)
+    return((desc*prob*vector_incrementos*pagos*SEM))
