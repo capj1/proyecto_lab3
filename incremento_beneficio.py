@@ -9,11 +9,12 @@ import numpy as np
 import datetime
 from dateutil import relativedelta
 
-def incremento_beneficio(fecha_inicio,edad,incremento,fecha_corte="01-06-2022",omega=115):
+def incremento_beneficio(fecha_inicio,edad,incremento,meses_de_cumplir=0,fecha_corte="01-06-2022",omega=115):
     #fecha corte default: 1ro de junio 2022
-    #se asume que ya cumplió años en el presente mes
+    #meses_de_cumplir: hace cuántos meses cumplió años (sin contar días), o 0 si cumple ese mes. 
+    #Puede ser negativo, que correspondería a cuántos meses le faltan para cumplir años.
 
-    meses_restantes=12*(omega-edad)
+    meses_restantes=12*(omega-edad)-meses_de_cumplir
 
     fechainicio = datetime.datetime.strptime(fecha_inicio, "%d-%m-%Y")
     fechacorte = datetime.datetime.strptime(fecha_corte, "%d-%m-%Y")
@@ -50,13 +51,13 @@ incremento_beneficio("01-02-2020",57,0.06)
 # In[148]:
 
 
-incremento_beneficio("01-02-2019",114,1)
+incremento_beneficio("01-02-2019",114,1,1)
 
 
 # In[149]:
 
 
-incremento_beneficio("01-02-2021",70,.0000001)
+incremento_beneficio("01-02-2021",70,.0000001,3)
 
 
 # In[ ]:
